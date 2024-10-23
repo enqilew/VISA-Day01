@@ -1,62 +1,47 @@
 package workshop;
 
-import java.io.Console;
+import java.util.ArrayList;
 
 public class ShoppingCart {
-
-    public static void main(String[] args){
-
-        boolean cont = true;
-        Console cons = System.console();
-
-        While (cont); {
-
-            System.out.printf("Welcome to your shopping cart.\n ");
-
-            String input = cons.readLine(">>>What would you like to do? (List, Add, Remove, Break)").trim();
-
-
-            switch(input.toUpperCase()) {
-
-                case "ADD":
-                    String addInput = cons.readLine("How many items would you like to add to your cart?").trim();
-                    
-                    int addItem = Integer.parseInt(addInput);
-
-                    String []cart = new String[addItem];
-
-                    for (int idx = 0; idx < cart.length; idx++){
-                        cart[idx] = cons.readLine("Add items %d: \n", idx+1);
-                    }
-
-                case "REMOVE":
-                    for 
-
-                    String[] terms = input.split(" ");
-
-                case "LIST":
-                    for (idx = 0; idx <= cart.length; idx++) {
-                        System.out.printf("%d. %s\n", idx+1, cart[idx]);
-
-                case "BREAK":
-                        cont = false;
-                        break;
-                
-
-
-        }
-
-
-
-
-
-        String cart[] = new String[itemCount];
-
-        for (int idx = 0; idx <= cart.length; idx++){
-            cart[idx] = cons.readLine("Add item %d: ", idx+1);
-        }
-
-
-    }
     
+    private ArrayList<String> cart;
+
+    // Constructor to initialize the cart
+    public ShoppingCart() {
+        cart = new ArrayList<>();
+    }
+
+    // Method to add items to the cart
+    public void addItems(String items) {
+        String[] itemArray = items.split(",\\s*");
+        for (String item : itemArray) {
+            if (cart.contains(item)) {
+                System.out.println("You have " + item + " in your cart");
+            } else {
+                cart.add(item);
+                System.out.println(item + " added to cart");
+            }
+        }
+    }
+
+    // Method to list items in the cart
+    public void listItems() {
+        if (cart.isEmpty()) {
+            System.out.println("Your cart is empty");
+        } else {
+            for (int i = 0; i < cart.size(); i++) {
+                System.out.println((i + 1) + ". " + cart.get(i));
+            }
+        }
+    }
+
+    // Method to delete an item from the cart
+    public void deleteItem(int index) {
+        if (index > 0 && index <= cart.size()) {
+            System.out.println(cart.get(index - 1) + " removed from cart");
+            cart.remove(index - 1);
+        } else {
+            System.out.println("Incorrect item index");
+        }
+    }
 }
